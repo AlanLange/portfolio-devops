@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Portfolio</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --panel-soft: #1f2937;
+        --primary: #38bdf8;
+        --secondary: #a78bfa;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --accent: #34d399;
+        --border: rgba(148, 163, 184, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #020817 0%, #0f172a 100%);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1100px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(12px);
+        background: rgba(15, 23, 42, 0.8);
+        border-bottom: 1px solid var(--border);
+        z-index: 10;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 72px;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      section {
+        padding: 100px 0;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        gap: 2rem;
+        min-height: 80vh;
+      }
+
+      .eyebrow {
+        color: var(--primary);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 1.05;
+        margin: 1rem 0;
+      }
+
+      .highlight {
+        color: var(--primary);
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 1.1rem;
+        max-width: 650px;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.9rem 1.5rem;
+        border-radius: 999px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #08111d;
+      }
+
+      .btn-secondary {
+        border-color: var(--border);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .profile-card {
+        background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), rgba(30, 41, 59, 0.9));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 1.25rem;
+        box-shadow: 0 25px 50px rgba(2, 6, 23, 0.5);
+      }
+
+      .profile-card .avatar {
+        height: 320px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(167, 139, 250, 0.3));
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 7rem;
+      }
+
+      .mini-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .stat {
+        background: rgba(148, 163, 184, 0.06);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.3rem;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        margin-bottom: 1rem;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        max-width: 700px;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .about-grid,
+      .project-grid,
+      .skill-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+
+      .card {
+        background: rgba(17, 24, 39, 0.75);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 1.5rem;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .card ul {
+        padding-left: 1.2rem;
+        margin: 0;
+      }
+
+      .skill-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .skill {
+        background: rgba(17, 24, 39, 0.75);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.25rem;
+        text-align: center;
+      }
+
+      .skill .icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .project {
+        background: rgba(17, 24, 39, 0.75);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .project-preview {
+        height: 180px;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(52, 211, 153, 0.25));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+      }
+
+      .project-body {
+        padding: 1.25rem;
+      }
+
+      .project-body h3 {
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-body p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .tag {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.75rem;
+        color: var(--text);
+        background: rgba(148, 163, 184, 0.06);
+      }
+
+      .contact-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(167, 139, 250, 0.12));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 2rem;
+        flex-wrap: wrap;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 1.5rem 0 3rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 760px) {
+        .hero,
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          flex-direction: column;
+          justify-content: center;
+          height: auto;
+          padding: 1rem 0;
+          gap: 0.75rem;
+        }
+
+        section {
+          padding: 80px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <div class="brand">Portfolio</div>
+          <div class="nav-links">
+            <a href="#about">Sobre mi</a>
+            <a href="#skills">Habilidades</a>
+            <a href="#projects">Proyectos</a>
+            <a href="#contact">Contacto</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="container hero">
+        <div>
+          <div class="eyebrow">Desarrollador / DevOps</div>
+          <h1>
+            Hola, soy <span class="highlight">Tu Nombre</span>
+          </h1>
+          <p class="lead">
+            Me apasiona crear soluciones digitales, automatizar procesos y mejorar la
+            experiencia de usuario con buenas prácticas de desarrollo y despliegue.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">Ver proyectos</a>
+            <a class="btn btn-secondary" href="#contact">Contactame</a>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">👨‍💻</div>
+          <div class="mini-stats">
+            <div class="stat">
+              <strong>2+</strong>
+              <span>Años</span>
+            </div>
+            <div class="stat">
+              <strong>10+</strong>
+              <span>Proyectos</span>
+            </div>
+            <div class="stat">
+              <strong>99%</strong>
+              <span>Motivación</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="container">
+        <h2 class="section-title">Sobre mi</h2>
+        <div class="about-grid">
+          <div class="card">
+            <p>
+              Soy un profesional enfocado en el desarrollo de software y en la mejora
+              continua de procesos tecnológicos. Me gusta trabajar con tecnologías modernas,
+              automatizar tareas y colaborar en proyectos donde pueda aportar valor con
+              código limpio y soluciones escalables.
+            </p>
+          </div>
+          <div class="card">
+            <ul>
+              <li>Especialidad en frontend y automatización.</li>
+              <li>Interés en DevOps, CI/CD y buenas prácticas.</li>
+              <li>Trabajo colaborativo y proactivo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="container">
+        <h2 class="section-title">Habilidades</h2>
+        <div class="skill-grid">
+          <div class="skill"><div class="icon">💻</div><strong>HTML</strong></div>
+          <div class="skill"><div class="icon">🎨</div><strong>CSS</strong></div>
+          <div class="skill"><div class="icon">⚙️</div><strong>JavaScript</strong></div>
+          <div class="skill"><div class="icon">🧩</div><strong>React</strong></div>
+          <div class="skill"><div class="icon">🐳</div><strong>Docker</strong></div>
+          <div class="skill"><div class="icon">☁️</div><strong>Cloud</strong></div>
+        </div>
+      </section>
+
+      <section id="projects" class="container">
+        <h2 class="section-title">Proyectos</h2>
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-preview">📦</div>
+            <div class="project-body">
+              <h3>Proyecto 1</h3>
+              <p>Aplicación de gestión con interfaz moderna y enfoque en experiencia de usuario.</p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JS</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-preview">🚀</div>
+            <div class="project-body">
+              <h3>Proyecto 2</h3>
+              <p>Pipeline de despliegue automatizado con integración continua y calidad de software.</p>
+              <div class="tags">
+                <span class="tag">GitHub</span>
+                <span class="tag">CI/CD</span>
+                <span class="tag">Docker</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-preview">📊</div>
+            <div class="project-body">
+              <h3>Proyecto 3</h3>
+              <p>Dashboard para monitorizar métricas y mejorar la toma de decisiones operativas.</p>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">API</span>
+                <span class="tag">UX</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="container">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-box">
+          <div>
+            <h3>Trabajemos juntos</h3>
+            <p class="section-copy" style="margin-bottom: 0;">
+              Estoy abierto a oportunidades, colaboraciones y proyectos interesantes.
+            </p>
+          </div>
+          <a class="btn btn-primary" href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 Tu Nombre · Portfolio personal
+    </footer>
+  </body>
+</html>
